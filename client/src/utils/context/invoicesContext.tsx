@@ -12,20 +12,18 @@ import { InvoiceNumberInYear } from "../../../types";
 
 interface ContetxProps {
   invoicesForYears: InvoiceNumberInYear[]
-  setInvoicesForYears: Dispatch<SetStateAction<InvoiceNumberInYear[]>>
 }
 
 const InvoicesContext = createContext<ContetxProps>({
   invoicesForYears: [],
-  setInvoicesForYears: () => [],
 })
 
 export const InvoicesForYearsProvider = ({ children }: { children: ReactNode }) => {
-  const { numberInvoicesYear, setNumberInvoicesYear } = useNumberInvoicesInYear()
+  const { numberInvoicesYear } = useNumberInvoicesInYear()
   return (
     <>
       <InvoicesContext.Provider
-        value={{ invoicesForYears: numberInvoicesYear, setInvoicesForYears: setNumberInvoicesYear }}
+        value={{ invoicesForYears: numberInvoicesYear}}
       >
         {children}
       </InvoicesContext.Provider>

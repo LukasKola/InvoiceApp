@@ -1,5 +1,6 @@
 
 import {  InvoiceNumberInYear } from "../../types"
+import YearInvoices from "./YearInvoices";
 
 
 interface InvoiceProps {
@@ -10,13 +11,10 @@ export const Invoices: React.FunctionComponent<InvoiceProps> = ({ invoices }) =>
     
     return (
         <div>
-            {invoices.map((year) => {
+            {invoices.map((element) => {
                 return ( 
-                    <div key={year.year} >
-                        <div>
-                            <h3>Rok: {year.year}</h3>
-                        </div>
-                        {year.invoices.map((e) => <div key={e.variabileSymbol} >{e.customer}</div>)}
+                    <div key={element.year} >
+                        <YearInvoices year={element.year} invoices={element.invoices} />
                     </div>
                 )
             })}
