@@ -1,4 +1,5 @@
 export type Invoice = {
+    createDate: Date,
     payDate: Date
     variabileSymbol: number
     paymentType: string
@@ -6,4 +7,9 @@ export type Invoice = {
     service: string
     totalPrice: string
     qrCode: string
+}
+
+export interface InvoiceNumberInYear {
+    year: number;
+    invoices: Invoice[];
 }

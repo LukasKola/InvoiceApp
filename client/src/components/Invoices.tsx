@@ -1,22 +1,25 @@
 
-import { Invoice } from "../../types"
+import {  InvoiceNumberInYear } from "../../types"
+
 
 interface InvoiceProps {
-    invoices: Invoice[]
+    invoices: InvoiceNumberInYear[]
 }
 
 export const Invoices: React.FunctionComponent<InvoiceProps> = ({ invoices }) => {
-
+    
     return (
         <div>
-            {invoices.map((invoice) => {
-                return (
-                    <div key={invoice.variabileSymbol}>
-                    <div>Faktura k datu:  {invoice.payDate.toString()} odberatel:  {invoice.customer}</div>
+            {invoices.map((year) => {
+                return ( 
+                    <div key={year.year} >
+                        <div>
+                            <h3>Rok: {year.year}</h3>
+                        </div>
+                        {year.invoices.map((e) => <div key={e.variabileSymbol} >{e.customer}</div>)}
                     </div>
-                
                 )
             })}
         </div>
-    )
-}
+    );
+};

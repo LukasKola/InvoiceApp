@@ -16,6 +16,7 @@ model KlaraInvoices {
   id Int @default(autoincrement()) @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  createDate DateTime
   payDate DateTime
   variabileSymbol Int
   paymentType String
@@ -23,12 +24,14 @@ model KlaraInvoices {
   service String
   totalPrice String
   qrCode String
+  note String
 }
 
 model SonaInvoices {
   id Int @default(autoincrement()) @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  createDate DateTime
   payDate DateTime
   variabileSymbol Int
   paymentType String
@@ -36,5 +39,6 @@ model SonaInvoices {
   service String
   totalPrice String
   qrCode String
+  note String
 }
 

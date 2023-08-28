@@ -3,8 +3,8 @@ import  {db} from '../utils/db.server'
 import { Invoice } from '../../types'
 
 
-export const invoices = async (): Promise<KlaraInvoices[]> => {
-    return db.klaraInvoices.findMany()
+export const invoices = (): Promise<KlaraInvoices[]> => {
+    return  db.klaraInvoices.findMany()
 }
 
 export const getSingleInvoice = async (id:number): Promise<KlaraInvoices | null>  => {
@@ -16,7 +16,7 @@ export const getSingleInvoice = async (id:number): Promise<KlaraInvoices | null>
 }
 
 export const addKlaraInvoice = async (invoice: Invoice): Promise<KlaraInvoices> => {
-    return db.klaraInvoices.create({
+    return  db.klaraInvoices.create({
         data: {
             ...invoice
         }
@@ -24,7 +24,7 @@ export const addKlaraInvoice = async (invoice: Invoice): Promise<KlaraInvoices> 
 }
 
 export const updateKlaraInvoice = async (updatedInvoice: Invoice, id: number): Promise<KlaraInvoices> => {
-    return db.klaraInvoices.update({
+    return  db.klaraInvoices.update({
         where: {
             id
         },
@@ -35,7 +35,7 @@ export const updateKlaraInvoice = async (updatedInvoice: Invoice, id: number): P
 }
 
 export const deleteKlaraInvoice = async (id: number): Promise<Invoice> => {
-   return await db.klaraInvoices.delete({
+   return  db.klaraInvoices.delete({
         where: {
             id
         }

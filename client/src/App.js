@@ -1,16 +1,18 @@
-import { useFetchInvoice } from '../src/utils/hooks/useFetchInvoices'
+
 import './App.css';
 import { Invoices } from './components/Invoices'
+import { useInvoiceContext} from './utils/context/invoicesContext'
 
 function App() {
-  const { invoices } = useFetchInvoice()
+  const {invoicesForYears} = useInvoiceContext()
 
   return (
     <div className="App">
       <header className="App-header">
-        {invoices &&
-          <Invoices invoices={invoices} />
+        {invoicesForYears &&
+          <Invoices invoices={invoicesForYears} />
         }
+       
       </header>
     </div>
   );
