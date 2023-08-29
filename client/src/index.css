@@ -11,3 +11,50 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.single-invoice {
+  gap: 5px;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  background-color: rgb(90, 88, 88);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  font-size: large;
+}
+
+.single-invoice:hover{
+  background-color: white;
+  color: black;
+}
+
+.closed-invoice {
+  display: flex;
+}
+
+.invoice-number,
+.invoice-date-info,
+.invoice-provider-authorization {
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.invoice-cutomer-provider {
+  display: flex;
+  flex-direction: row;
+  gap: 50%;
+  margin: 5px;
+  padding: 5px;
+}
+
+.invoice {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin:20px 0px 20px 25%;
+}

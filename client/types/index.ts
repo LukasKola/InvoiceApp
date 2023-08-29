@@ -13,3 +13,15 @@ export interface InvoiceNumberInYear {
     year: number;
     invoices: Invoice[];
 }
+
+export interface Provider {
+        name: string,
+        bussinesAdressStreet: string,
+        bussinesCiry: string,
+        postalCode: string,
+        ico: string,
+        medicalCode: string,
+        from: string,
+        medicalLicenceProvider: string,
+        dphPayer: string,
+}

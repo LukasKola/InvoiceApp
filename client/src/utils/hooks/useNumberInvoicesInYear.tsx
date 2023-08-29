@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Invoice, InvoiceNumberInYear } from "../../../types"
+import { InvoiceNumberInYear } from "../../../types"
 import { useFetchInvoice } from "./useFetchInvoices"
 import { assignInvoicesToYears } from "../assignInvoicesToYears"
 import { getYears } from "../getYears"

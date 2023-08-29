@@ -18,13 +18,6 @@ export const useFetchInvoice = () => {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        if (invoices) {
-            console.log(invoices);
-        }
-    }, [invoices]);
-
-
     return {
         invoices
     }
