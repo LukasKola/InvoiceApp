@@ -1,8 +1,8 @@
-import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet, Font, Image } from '@react-pdf/renderer';
 import { Invoice } from '../../types';
 import { FC } from 'react'
 import { format } from 'date-fns'
-
+import QRCode from 'qrcode';
 
 
 interface MyDocumentProps {
@@ -24,13 +24,20 @@ const MyDocument: FC<MyDocumentProps> = ({ invoice }) => {
         medicalCode: 'S-MHMP 734534/2021',
         from: '31.5.2021',
         medicalLicenceProvider: 'Magistrát Praha',
-        dphPayer: 'Neplatce DPH'
+        dphPayer: 'Neplátce DPH',
+        bank: 'Moneta Money Bank',
+        BAnumber: '211910979/0600',
     }
 
     Font.register({
         family: 'Oswald',
         src: 'https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf'
-      });
+    });
+
+    Font.register({
+        family: 'Roboto',
+        src: '/roboto/Roboto-Regular.ttf'
+    })
 
     const styles = StyleSheet.create({
         customer: {
@@ -53,9 +60,9 @@ const MyDocument: FC<MyDocumentProps> = ({ invoice }) => {
         page: {
             display: 'flex',
             flexDirection: 'column',
-            gap: '50px',
-            margin:'20px 0px 20px 20px' ,
-            fontFamily: "Oswald",
+            gap: '30px',
+            margin: '20px 0px 20px 20px',
+            fontFamily: "Roboto",
             fontSize: '12',
         },
         dates: {
@@ -64,6 +71,44 @@ const MyDocument: FC<MyDocumentProps> = ({ invoice }) => {
             display: 'flex',
             flexDirection: 'column',
 
+        },
+        table: {
+            width: '550px',
+            borderStyle: 'solid',
+            borderWidth: 1,
+            borderBottomWidth: 0,
+        },
+        tableRow: {
+            flexDirection: 'row',
+        },
+        tableColHeader: {
+            flex: 1,
+            borderStyle: 'solid',
+            borderBottomColor: '#000',
+            borderBottomWidth: 1,
+            alignItems: 'center',
+            backgroundColor: '#f2f2f2',
+            padding: 5,
+        },
+        tableCol: {
+            flex: 1,
+            borderStyle: 'solid',
+            borderBottomColor: '#000',
+            borderBottomWidth: 1,
+            padding: 5,
+            textAlign: "center",
+        },
+        qrCode: {
+            width: '150px',
+            height: '150px',
+        }
+    })
+
+    let qrCodeImageUrl = ''
+
+    QRCode.toDataURL(invoice.qrCode, (err, url) => {
+        if(!err){
+            qrCodeImageUrl = url
         }
     })
 
@@ -71,14 +116,14 @@ const MyDocument: FC<MyDocumentProps> = ({ invoice }) => {
         <Document >
             <Page size={'A4'} >
                 <View style={styles.page}>
-                        <View>
-                            <Text style={{margin: '5px',padding: '5px'}}>Cislo faktury: {invoice.variabileSymbol}</Text>
-                        </View>
+                    <View>
+                        <Text style={{ margin: '5px', padding: '5px' }}>Číslo faktury: {invoice.variabileSymbol}</Text>
+                    </View>
                     <View style={styles.dates} >
-                        <Text>Datum vystaveni:{formatedCreateDate}</Text>
-                        <Text>Datum splatnosti: {formatedCreateDate}</Text>
-                        <Text>Variabilni sybmol: {invoice.variabileSymbol}</Text>
-                        <Text>Forma uhrady: {invoice.paymentType}</Text>
+                        <Text>Datum vystavení: {formatedCreateDate}</Text>
+                        <Text>Datum splatnosti: {formatedPayDate}</Text>
+                        <Text>Variabilní symbol: {invoice.variabileSymbol}</Text>
+                        <Text>Forma úhrady: {invoice.paymentType}</Text>
                     </View>
                     <View style={styles.provAndCustomerBlock} >
                         <View style={styles.provider}>
@@ -86,18 +131,43 @@ const MyDocument: FC<MyDocumentProps> = ({ invoice }) => {
                             <Text>{provider.name}</Text>
                             <Text>{provider.bussinesAdressStreet}</Text>
                             <Text>{provider.postalCode} {provider.bussinesCiry}</Text>
-                            <Text>ICO: {provider.ico}</Text>
+                            <Text>IČO: {provider.ico}</Text>
                             <Text>{provider.dphPayer}</Text>
                         </View>
                         <View style={styles.customer}>
-                            <Text>Odberatel: </Text>
+                            <Text>Odběratel: </Text>
                             <Text>{invoice.customer}</Text>
                         </View>
                     </View>
-                    <View style={{ display:'flex', flexDirection: 'column', padding: '5px', margin: '5px'}}>
-                            <Text>Opravneni k poskytovani zdravotnickych sluzeb od: {provider.from}</Text>
-                            <Text>Vydal: {provider.medicalLicenceProvider}</Text>
+                    <View style={{ display: 'flex', flexDirection: 'column', padding: '5px', margin: '5px' }}>
+                        <Text>Opravnění k poskytování zdravotnických služeb od: {provider.from}</Text>
+                        <Text>Vydal: {provider.medicalLicenceProvider}</Text>
+                    </View>
+                    <View style={{ display: 'flex', flexDirection: 'column', padding: '5px', margin: '5px' }}>
+                        <Text>{provider.bank}</Text>
+                        <Text>{provider.BAnumber}</Text>
+                    </View>
+                    <View style={styles.table}>
+                        <View style={styles.tableRow}>
+                            <View style={styles.tableColHeader}>
+                                <Text>Název zboží, služby</Text>
+                            </View>
+                            <View style={styles.tableColHeader}>
+                                <Text>Cena</Text>
+                            </View>
                         </View>
+                        <View style={styles.tableRow}>
+                            <View style={styles.tableCol}>
+                                <Text>{invoice.service}</Text>
+                            </View>
+                            <View style={styles.tableCol}>
+                                <Text>{invoice.totalPrice},-Kč</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.qrCode}>
+                        {qrCodeImageUrl && <Image src={qrCodeImageUrl} />}
+                    </View>
                 </View>
             </Page>
         </Document>

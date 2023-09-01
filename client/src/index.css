@@ -56,5 +56,23 @@ code {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  margin:20px 0px 20px 25%;
+  margin:20px 0px 20px 22%;
 }
+
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 550px
+}
+
+tr {
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid black;
+}
+
+.table-header {
+  background-color: rgb(187, 187, 187);
+  color: black;
+}
+
