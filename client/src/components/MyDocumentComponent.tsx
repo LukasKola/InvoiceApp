@@ -15,10 +15,11 @@ const MyDocumentComponent: FC<MyDocumentComponentProps> = ({ invoice, provider }
     const payDateInput = new Date(invoice.payDate)
     const formatedPayDate = format(payDateInput, 'dd/MM/yyyy')
 
+    const testQRstring = 'SPD*1.0*ACC:CZ0000211910979+AGBACZPP*AM:450.00*CC:CZK*MSG:PLATBA PRO KLARKU*X-VS:1234567890'
 
     let qrCodeImageUrl: string = ''
 
-    QRCode.toDataURL(invoice.qrCode, (err, url) => {
+    QRCode.toDataURL(testQRstring, (err, url) => {
         if(!err){
             qrCodeImageUrl = url
         }
@@ -69,6 +70,8 @@ const MyDocumentComponent: FC<MyDocumentComponentProps> = ({ invoice, provider }
             </table>
             <div>
                 {qrCodeImageUrl && <img src={qrCodeImageUrl} />}
+                
+                    <img alt="qr platba" src="https://api.paylibo.com/paylibo/generator/czech/image?compress=false&size=200&accountNumber=211910979&bankCode=0600&amount=5800&currency=CZK&vs=0258" />
                 
             </div>
         </div>
