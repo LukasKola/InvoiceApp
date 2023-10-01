@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.ts",
-    "seed": "ts-node --require esbuild-register prisma/seed.ts"
+    "seed": "ts-node --require esbuild-register prisma/seed.ts",
+    "start": "node src/index.ts"
   },
   "keywords": [],
   "author": "",
