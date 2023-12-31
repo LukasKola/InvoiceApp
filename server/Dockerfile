@@ -1,5 +1,5 @@
 # Použijeme oficiální image Node.js
-FROM node:14
+FROM node:16.13
 
 # Nastavíme pracovní adresář v kontejneru
 WORKDIR /src
