@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Nastavíme port, na kterém bude aplikace poslouchat
-EXPOSE 8080
+EXPOSE 3000
 
 # Spustíme aplikaci
 CMD ["npm", "start"]
