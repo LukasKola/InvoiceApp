@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 RUN npx prisma generate
-ENV DATABASE_URL='mysql://l3hgta5q2dm1izarlsrk:pscale_pw_QF7GpkFwZrnhXG0Z2CKzZXb6Im7cZunr9MKCGgIjwJT@aws.connect.psdb.cloud/invocieapp?sslaccept=strict'
+ENV DATABASE_URL='mysql://nakt3wo239cbh09ureak:pscale_pw_IuVzBWkEVBTuQngNrhaezxe97HVy54Ukmo70iN7uajF@aws.connect.psdb.cloud/invocieapp?sslaccept=strict'
 ENV PORT=3000
 # Nastavíme port, na kterém bude aplikace poslouchat
 EXPOSE 3000
